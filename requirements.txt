@@ -5,3 +5,4 @@ flask_bcrypt
 flask_wtf
 flask_login
 flask_sqlalchemy
+Gunicorn
