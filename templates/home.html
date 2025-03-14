@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    {% if current_user.is_authenticated %}
+        <a href="{{url_for('logout')}}">Logout</a><br><br><br>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+        <br>
+        {% if data %}
+            {%for d in data%}
+                <a href="{{url_for('download', objectName=d[1],originalName=d[0])}}">{{d[0]}}</a><br>
+            {%endfor%}
+        {% endif %}
+    {% else %}
+    <a href="{{url_for('signUp')}}">New User?Sign Up</a><br>
+    <form method="POST" action="">
+        {{loginForm.hidden_tag()}}
+        {{loginForm.username}}
+        {{loginForm.password}}
+        {{loginForm.submit}}
+    </form>
+    {% endif %}
+</body>
+</html>
